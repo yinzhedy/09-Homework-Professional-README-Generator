@@ -2,12 +2,14 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const util = require('util');
+const generate = require('./utils/generateMarkdown.js');
+const path = require('path');
 
 // TODO: Create an array of questions for user input
 const writeFileAsync = util.promisify(fs.writeFile);
 
-const promptUser = () => {
-    return inquirer.prompt([
+inquirer
+  .prompt([
     {
         type: 'input',
         name: 'title',
@@ -28,16 +30,17 @@ const promptUser = () => {
         message: "Please check all components you'd like to include in your README",
         choices: [
             'Installation',
-         'Usage',
-          'Screenshots',
-           'Video',
+            'Usage',
+            'Screenshots',
+            'Demo',
             'Credits',
-             'License',
-              'Badges',
-               'Features',
-                'How to Contribute',
-                 'Tests'
-                ],
+            'License',
+            'Badges',
+            'Features',
+            'How to Contribute',
+            'Tests'
+        ],
+
       },
       {
         type: 'input',
@@ -87,45 +90,23 @@ const promptUser = () => {
         name: 'tests',
         message: "Please include any tests for your application here:",
       },
-    ]);
-};
+])
 
-
-const generateREADME = (answers) =>
-  `# ${answers.title}
-  ## Description
-  ${answers.description}
-  ## Table of Contents
-  ${answers.index.choices[0]}
-  ${answers.index.choices[1]}
-  ${answers.index.choices[2]}
-  ${answers.index.choices[3]}
-  ${answers.index.choices[4]}
-  ${answers.index.choices[5]}
-  ${answers.index.choices[6]}
-  ${answers.index.choices[7]}
-  ${answers.index.choices[8]}
-  ${answers.index.choices[9]}
-  ## Installation
-  ${answers.installation}
-  ## Credits
-  ${answers.credits}
-  ## License
-  ${answers.license}
-  ## Badges
-  ${answers.badges}
-  ## Features
-  ${answers.features}
-  ## How to Contribute
-  ${answers.howToContribute}
-  ## Tests
-  ${answers.tests}`;
-
+// const installation = questions[2].choices[0]
+// const usage = questions[2].choices[1]
+// const screenshots = questions[2].choices[2]
+// const demo = questions[2].choices[3]
+// const credits = questions[2].choices[4]
+// const license = questions[2].choices[5]
+// const badges = questions[2].choices[6]
+// const features = questions[2].choices[7]
+// const howToContribute = questions[2].choices[8]
+// const tests = questions[2].choices[9]
 
 // TODO: Create a function to write README file
 const init = () => {
     promptUser()
-      .then((answers) => writeFileAsync('generatedREADME.md', generateREADME(answers)))
+      .then((answers) => fs.writeFileAsync(path.join (process.cwd(), "generatedREADME.md"), generateREADME(answers)))
       .then(() => console.log('Successfully created generatedREADME.md!'))
       .catch((err) => console.error(err));
   };

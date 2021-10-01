@@ -1,22 +1,35 @@
-// TODO: Create a function that returns a license badge based on which license is passed in
-// If there is no license, return an empty string
-function renderLicenseBadge(license) {}
+function tableOfContents(answers) {
+  const choices = answers.index
+  // const usage = answers[2].choices[1]
+  // const screenshots = answers[2].choices[2]
+  // const demo = answers[2].choices[3]
+  // const credits = answers[2].choices[4]
+  // const license = answers[2].choices[5]
+  // const badges = answers[2].choices[6]
+  // const features = answers[2].choices[7]
+  // const howToContribute = answers[2].choices[8]
+  // const tests = answers[2].choices[9]
+  let text = " ";
+  console.log(choices)
+  for (let i = 0; i < choices.length; i++) {
+    console.log(choices[i])
+  if (choices[i]) {
+    console.log(text)
+    text = text.concat(choices[i]) 
+    break;
+  };
+  };
+  console.log(text)
+  return text;
+};
 
-// TODO: Create a function that returns the license link
-// If there is no license, return an empty string
-function renderLicenseLink(license) {}
 
-// TODO: Create a function that returns the license section of README
-// If there is no license, return an empty string
-function renderLicenseSection(license) {}
-
-// TODO: Create a function to generate markdown for README
 function generateMarkdown(answers) {
   return  `# ${answers.title}
   ## Description
   ${answers.description}
   ## Table of Contents
-  ${answers.index.choices}
+  ${tableOfContents(answers)}
   ## Installation
   ${answers.installation}
   ## Usage

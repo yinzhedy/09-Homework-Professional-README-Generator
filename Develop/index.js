@@ -72,6 +72,11 @@ inquirer.prompt([
       },
       {
         type: 'input',
+        name: 'license',
+        message: 'Please identify a license for your project'
+      },
+      {
+        type: 'input',
         name: 'badges',
         message: "Please include anything you'd like to include in your Badges section:",
       },

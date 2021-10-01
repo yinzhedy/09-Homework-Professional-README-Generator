@@ -25,24 +25,6 @@ inquirer.prompt([
         'what did you learn?'
       },
       {
-        type: 'checkbox',
-        name: 'index',
-        message: "Please check all components you'd like to include in your README",
-        choices: [
-            'Installation',
-            'Usage',
-            'Screenshots',
-            'Demo',
-            'Credits',
-            'License',
-            'Badges',
-            'Features',
-            'How to Contribute',
-            'Tests'
-        ],
-
-      },
-      {
         type: 'input',
         name: 'usage',
         message: "Please include instructions and examples for the use of your project here:",

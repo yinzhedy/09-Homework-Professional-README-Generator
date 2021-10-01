@@ -1,15 +1,15 @@
-// TODO: Include packages needed for this application
+
+function init () {
+
 const inquirer = require('inquirer');
 const fs = require('fs');
 const util = require('util');
-const generate = require('./utils/generateMarkdown.js');
+const generateREADME = require('./utils/generateMarkdown.js');
 const path = require('path');
 
-// TODO: Create an array of questions for user input
 const writeFileAsync = util.promisify(fs.writeFile);
 
-inquirer
-  .prompt([
+inquirer.prompt([
     {
         type: 'input',
         name: 'title',
@@ -92,23 +92,14 @@ inquirer
       },
 ])
 
-// const installation = questions[2].choices[0]
-// const usage = questions[2].choices[1]
-// const screenshots = questions[2].choices[2]
-// const demo = questions[2].choices[3]
-// const credits = questions[2].choices[4]
-// const license = questions[2].choices[5]
-// const badges = questions[2].choices[6]
-// const features = questions[2].choices[7]
-// const howToContribute = questions[2].choices[8]
-// const tests = questions[2].choices[9]
+      .then((answers) => {
+          writeFileAsync(path.join (process.cwd(), "README.md"), generateREADME(answers));
+        })
+        .then(() => console.log('Successfully created README.md!'))
+        .catch((err) => console.error(err));
+    
 
-// TODO: Create a function to write README file
-const init = () => {
-    promptUser()
-      .then((answers) => fs.writeFileAsync(path.join (process.cwd(), "generatedREADME.md"), generateREADME(answers)))
-      .then(() => console.log('Successfully created generatedREADME.md!'))
-      .catch((err) => console.error(err));
-  };
   
+    }
+
   init();
